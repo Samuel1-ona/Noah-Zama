@@ -14,7 +14,7 @@ export const Hero: React.FC<{ onLaunchDemo: () => void; onOpenPitch: () => void 
                 >
                     <h1 style={{ fontSize: '4rem', fontWeight: 800, lineHeight: 1.1, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
                         The Privacy Layer for <br />
-                        <span className="text-gradient">Avalanche Identity</span>
+                        <span className="text-gradient">Zama Identity</span>
                     </h1>
                 </motion.div>
 
@@ -30,8 +30,8 @@ export const Hero: React.FC<{ onLaunchDemo: () => void; onOpenPitch: () => void 
                         lineHeight: 1.6
                     }}
                 >
-                    Securely verify your identity using Zero-Knowledge Proofs.
-                    Verified once, reusable across Gaming, Consumer Apps, and DeFi on Avalanche.
+                    Verify once, use everywhere. <br />
+                    Securely reusable across Gaming, Consumer Apps, and DeFi on Zama.
                 </motion.div>
 
                 <motion.div
@@ -54,7 +54,7 @@ export const Hero: React.FC<{ onLaunchDemo: () => void; onOpenPitch: () => void 
                     >
                         View Pitch Deck <Zap size={18} />
                     </button>
-                    <a href="https://github.com/Samuel1-ona/Noah" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ gap: '0.75rem', textDecoration: 'none' }}>
+                    <a href="https://github.com/Samuel1-ona/Noah-Zama" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ gap: '0.75rem', textDecoration: 'none' }}>
                         <Github size={20} /> GitHub
                     </a>
                 </motion.div>
@@ -77,10 +77,10 @@ export const Hero: React.FC<{ onLaunchDemo: () => void; onOpenPitch: () => void 
                         <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#FF5F56' }} />
                         <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#FFBD2E' }} />
                         <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#27C93F' }} />
-                        <span style={{ marginLeft: '1rem', color: 'var(--text-dim)', fontSize: '0.875rem', fontFamily: 'var(--font-mono)' }}>noah-avalanche-sdk</span>
+                        <span style={{ marginLeft: '1rem', color: 'var(--text-dim)', fontSize: '0.875rem', fontFamily: 'var(--font-mono)' }}>noah-zama-sdk</span>
                     </div>
                     <code style={{ color: '#F8F8F2', fontFamily: 'var(--font-mono)', fontSize: '1.1rem' }}>
-                        <span style={{ color: '#66D9EF' }}>npm install</span> noah-avalanche-sdk
+                        <span style={{ color: '#66D9EF' }}>npm install</span> noah-zama
                     </code>
                 </div>
             </motion.div>

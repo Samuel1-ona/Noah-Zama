@@ -16,7 +16,7 @@ export const ProcessFlow: React.FC = () => {
         {
             icon: <CheckCircle size={32} />,
             title: "03. Verified Identity",
-            description: "Protocols verify the proof on Avalanche and grant access instantly."
+            description: "Protocols verify the proof on Zama and grant access instantly."
         }
     ];
 
@@ -24,7 +24,7 @@ export const ProcessFlow: React.FC = () => {
         <section className="container" style={{ padding: '6rem 0' }}>
             <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
                 <h2 style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem' }}>How Noah Works</h2>
-                <p style={{ color: 'var(--text-muted)', fontSize: '1.125rem' }}>The standard for institutional-grade private identity.</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: '1.125rem' }}>Verify once, use everywhere.</p>
             </div>
 
             <div style={{

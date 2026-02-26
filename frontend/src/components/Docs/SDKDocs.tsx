@@ -68,7 +68,7 @@ export const SDKDocs: React.FC = () => {
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
                         <h1 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>Noah SDK Overview</h1>
                         <p style={{ fontSize: '1.125rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '2rem' }}>
-                            The Noah SDK is the gateway to privacy-preserving identity on Avalanche. It bridges human identity documents with the blockchain using Zero-Knowledge Proofs, allowing users to prove attributes (like age or citizenship) without revealing their personal data.
+                            The Noah SDK is the gateway to privacy-preserving identity on Zama. It bridges human identity documents with the blockchain using Fully Homomorphic Encryption (FHE), allowing users to prove attributes (like age or citizenship) without revealing their personal data.
                         </p>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '3rem' }}>
                             <div className="glass" style={{ padding: '1.5rem' }}>
@@ -76,19 +76,19 @@ export const SDKDocs: React.FC = () => {
                                 <p style={{ color: 'var(--text-dim)', fontSize: '0.9rem' }}>Sensitive data like MRZ lines stay in the browser. ZK-Proofs are generated locally or in secure enclaves.</p>
                             </div>
                             <div className="glass" style={{ padding: '1.5rem' }}>
-                                <h4 style={{ color: 'var(--primary)', marginBottom: '0.5rem' }}>Avalanche L1 Ready</h4>
-                                <p style={{ color: 'var(--text-dim)', fontSize: '0.9rem' }}>Built-in support for multiple Avalanche subnets with automated network switching logic.</p>
+                                <h4 style={{ color: 'var(--primary)', marginBottom: '0.5rem' }}>Zama FHEVM Ready</h4>
+                                <p style={{ color: 'var(--text-dim)', fontSize: '0.9rem' }}>Built-in support for Zama's FHEVM with native encrypted types and private state management.</p>
                             </div>
                         </div>
 
                         <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1.5rem' }}>Full Integration Guide</h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                             {[
-                                { step: "1", title: "Initialize SDK", desc: "Connect the SDK to your wallet provider and the local Avalanche RPC." },
+                                { step: "1", title: "Initialize SDK", desc: "Connect the SDK to your wallet provider and the Zama Sepolia RPC." },
                                 { step: "2", title: "Check Existing KYC", desc: "Immediately check if the connected address already has a registered credential to prevent redundant flows." },
                                 { step: "3", title: "OCR Extraction", desc: "Scan physical documents locally using the built-in MRZ extractor." },
                                 { step: "4", title: "Proof Submission", desc: "Trigger an on-chain registration that binds the identity to the user's wallet." },
-                                { step: "5", title: "Track Transactions", desc: "Monitor confirmations and provide direct links to the Avalanche explorer." }
+                                { step: "5", title: "Track Transactions", desc: "Monitor confirmations and provide direct links to the block explorer." }
                             ].map((s) => (
                                 <div key={s.step} style={{ display: 'flex', gap: '1.5rem', padding: '1.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '1rem', border: '1px solid var(--border)' }}>
                                     <div style={{ background: 'var(--primary)', color: 'white', width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, flexShrink: 0 }}>
@@ -143,11 +143,11 @@ export const SDKDocs: React.FC = () => {
                 return (
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
                         <h1 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>Installation</h1>
-                        <p style={{ marginBottom: '1.5rem', color: 'var(--text-muted)' }}>The Noah Protocol SDK is published as `noah-avalanche-sdk`. It provides all tools necessary for ZK proof generation, MRZ extraction, and smart contract interaction.</p>
+                        <p style={{ marginBottom: '1.5rem', color: 'var(--text-muted)' }}>The Noah Protocol SDK is published as `noah-zama`. It provides all tools necessary for FHE encryption, MRZ extraction, and smart contract interaction.</p>
 
                         <div style={{ marginBottom: '2.5rem' }}>
                             <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1rem' }}>Production Install</h3>
-                            <CodeBlock code="npm install noah-avalanche-sdk" label="Terminal" id="install-prod" />
+                            <CodeBlock code="npm install noah-zama" label="Terminal" id="install-prod" />
                         </div>
 
                         <div className="glass" style={{ padding: '1.5rem', marginTop: '2rem' }}>
@@ -157,7 +157,7 @@ export const SDKDocs: React.FC = () => {
                             <p style={{ fontSize: '0.875rem', color: 'var(--text-dim)', marginBottom: '1rem' }}>
                                 Noah requires `ethers` (v6) for blockchain connectivity. If you are building for the web, ensure your environment supports `WASM` for the internal prover.
                             </p>
-                            <CodeBlock code='{\n  "dependencies": {\n    "noah-avalanche-sdk": "^0.1.2",\n    "ethers": "^6.10.0",\n    "framer-motion": "^11.0.0"\n  }\n}' label="package.json" id="package-deps-v2" />
+                            <CodeBlock code='{\n  "dependencies": {\n    "noah-zama": "^0.1.2",\n    "ethers": "^6.10.0",\n    "framer-motion": "^11.0.0"\n  }\n}' label="package.json" id="package-deps-v2" />
                         </div>
 
                         <div style={{ background: 'rgba(239, 68, 68, 0.05)', border: '1px solid rgba(239, 68, 68, 0.2)', padding: '1.5rem', borderRadius: '1rem', marginTop: '2.5rem' }}>
@@ -175,7 +175,7 @@ export const SDKDocs: React.FC = () => {
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
                         <h1 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>Initialization</h1>
                         <p style={{ marginBottom: '2rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                            Noah should be initialized once in your application's lifecycle, typically within a context provider or a dedicated hook. It requires a `signer` for write operations and an `rpcUrl` for querying the Avalanche L1.
+                            Noah should be initialized once in your application's lifecycle, typically within a context provider or a dedicated hook. It requires a `signer` for write operations and an `rpcUrl` for querying the Zama network.
                         </p>
 
                         <div style={{ marginBottom: '3rem' }}>
@@ -183,7 +183,7 @@ export const SDKDocs: React.FC = () => {
                             <CodeBlock
                                 label="src/hooks/useNoah.ts"
                                 id="init-code-v2"
-                                code={`import { NoahSDK } from 'noah-avalanche-sdk';\nimport { ethers } from 'ethers';\n\n// 1. Setup your provider (e.g., MetaMask)\nconst provider = new ethers.BrowserProvider(window.ethereum);\n\n// 2. Initialize the Noah SDK\nconst sdk = new NoahSDK({\n  provider: provider,\n  rpcUrl: 'https://avax-fuji.g.alchemy.com/v2/gu3D3rKyivv6bhmb3UbyUSYxThLz7C_c' // Avalanche Fuji RPC\n});\n\n// 3. (Optional) Explicitly initialize contracts\nawait sdk.init(provider);`}
+                                code={`import { NoahSDK } from 'noah-zama';\nimport { ethers } from 'ethers';\n\n// 1. Setup your provider (e.g., MetaMask)\nconst provider = new ethers.BrowserProvider(window.ethereum);\n\n// 2. Initialize the Noah SDK\nconst sdk = new NoahSDK({\n  provider: provider,\n  rpcUrl: 'https://sepolia.zama.ai' // Zama Sepolia RPC\n});\n\n// 3. (Optional) Explicitly initialize contracts\nawait sdk.init(provider);`}
                             />
                         </div>
 
@@ -206,7 +206,7 @@ export const SDKDocs: React.FC = () => {
                                     <tr>
                                         <td style={{ padding: '0.5rem', fontFamily: 'var(--font-mono)' }}>rpcUrl</td>
                                         <td style={{ padding: '0.5rem', color: 'var(--text-dim)' }}>string</td>
-                                        <td style={{ padding: '0.5rem' }}>Your Avalanche node endpoint.</td>
+                                        <td style={{ padding: '0.5rem' }}>Your Zama node endpoint.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -269,7 +269,7 @@ export const SDKDocs: React.FC = () => {
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
                         <h1 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>On-Chain Lifecycle</h1>
                         <p style={{ marginBottom: '2rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                            The final stage of integration involves interacting with the Noah smart contracts on Avalanche. You can check existing verification status and register new credentials.
+                            The final stage of integration involves interacting with the Noah smart contracts on Zama. You can check existing verification status and register new credentials using encrypted handles.
                         </p>
 
                         <div style={{ marginBottom: '3rem' }}>

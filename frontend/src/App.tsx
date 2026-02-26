@@ -66,7 +66,7 @@ function App() {
         console.error('Failed to connect wallet:', err);
       }
     } else {
-      alert('Please install MetaMask to use Noah on Avalanche.');
+      alert('Please install MetaMask to use Noah on Zama.');
     }
   };
 
@@ -141,7 +141,7 @@ function App() {
                       fontWeight: 600,
                       cursor: 'pointer'
                     }}>
-                      <AlertCircle size={14} /> Switch to Fuji Testnet
+                      <AlertCircle size={14} /> Switch to Zama Sepolia
                     </button>
                   )}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.5rem 1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '0.5rem', border: '1px solid var(--border)' }}>
@@ -193,7 +193,7 @@ function App() {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-              <a href="https://github.com/Samuel1-ona/Noah" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-dim)' }}>
+              <a href="https://github.com/Samuel1-ona/Noah-Zama" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-dim)' }}>
                 <Github size={20} />
               </a>
               <button
@@ -240,7 +240,7 @@ function App() {
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <img src="/logo.png" alt="Noah" style={{ width: 32, height: 32, borderRadius: '0.5rem', objectFit: 'contain' }} />
-            <span style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.02em' }}>NOAH <span style={{ color: 'var(--primary)', fontSize: '0.75rem', verticalAlign: 'top' }}>AVAX</span></span>
+            <span style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.02em' }}>NOAH <span style={{ color: 'var(--primary)', fontSize: '0.75rem', verticalAlign: 'top' }}>ZAMA</span></span>
           </div>
 
           <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }} className="nav-links">
@@ -259,7 +259,7 @@ function App() {
             </button>
             <div style={{ width: 1, height: 16, background: 'var(--border)' }} />
             <div style={{ display: 'flex', gap: '1rem' }}>
-              <a href="https://github.com/Samuel1-ona/Noah" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/Samuel1-ona/Noah-Zama" target="_blank" rel="noopener noreferrer">
                 <Github size={20} style={{ color: 'var(--text-dim)', cursor: 'pointer' }} />
               </a>
               <Twitter size={20} style={{ color: 'var(--text-dim)', cursor: 'pointer' }} />

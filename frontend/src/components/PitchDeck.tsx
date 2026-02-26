@@ -29,7 +29,7 @@ export const PitchDeck: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         {
             id: 0,
             title: "NOAH Protocol",
-            subtitle: "The Privacy Layer for Avalanche Identity",
+            subtitle: "The Privacy Layer for Zama Identity",
             icon: <ShieldCheck size={48} style={{ color: 'var(--primary)' }} />,
             content: (
                 <div style={{ textAlign: 'center' }}>
@@ -42,7 +42,7 @@ export const PitchDeck: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                             <span style={{ fontSize: '0.875rem', fontWeight: 600 }}>Production Ready</span>
                         </div>
                         <div style={{ width: 1, height: 24, background: 'var(--border)' }} />
-                        <span style={{ fontSize: '0.875rem', color: 'var(--text-dim)' }}>Built on Avalanche</span>
+                        <span style={{ fontSize: '0.875rem', color: 'var(--text-dim)' }}>Built on Zama</span>
                     </div>
                 </div>
             )
@@ -119,7 +119,7 @@ export const PitchDeck: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                     </div>
                     <ArrowRight className="text-dim" />
                     <div className="glass" style={{ width: '25%', padding: '1.5rem', textAlign: 'center' }}>
-                        <h4 style={{ marginBottom: '0.5rem' }}>3. Avalanche</h4>
+                        <h4 style={{ marginBottom: '0.5rem' }}>3. Zama</h4>
                         <p style={{ fontSize: '0.8rem', color: 'var(--text-dim)' }}>On-chain verification and access grant.</p>
                     </div>
                 </div>
@@ -152,7 +152,7 @@ export const PitchDeck: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         },
         {
             id: 5,
-            title: "Why Avalanche?",
+            title: "Why Zama?",
             subtitle: "The Infrastructure for Scale",
             icon: <BarChart3 size={48} style={{ color: 'var(--primary)' }} />,
             content: (
@@ -162,7 +162,7 @@ export const PitchDeck: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                             <div style={{ minWidth: '24px', height: '24px', borderRadius: '50%', background: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '0.75rem' }}>✓</div>
                             <div>
                                 <strong>Instant Finality</strong>
-                                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Avalanche's consensus ensures identity grants are settled in sub-seconds.</p>
+                                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Zama's FHEVM ensures identity grants are settled with full on-chain privacy.</p>
                             </div>
                         </li>
                         <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
@@ -176,7 +176,7 @@ export const PitchDeck: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                             <div style={{ minWidth: '24px', height: '24px', borderRadius: '50%', background: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '0.75rem' }}>✓</div>
                             <div>
                                 <strong>Institutional Adoption</strong>
-                                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Avalanche is the preferred chain for RWAs needing private compliance layers.</p>
+                                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Zama is the preferred network for confidential RWAs needing privacy layers.</p>
                             </div>
                         </li>
                     </ul>
