@@ -1,5 +1,5 @@
 {
-  "name": "noah-zama",
+  "name": "noah-protocol",
   "version": "0.1.1",
   "description": "Verify once, use everywhere.",
   "main": "dist/index.js",
@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Samuel1-ona/Noah-Zama.git"
+    "url": "https://github.com/Samuel1-ona/Noah-.git"
   },
   "files": [
     "dist",
@@ -24,6 +24,7 @@
     "zk-proof",
     "privacy",
     "ethereum",
+    "zama",
     "blockchain"
   ],
   "author": "NOAH Protocol",

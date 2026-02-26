@@ -15,7 +15,7 @@ import {
 
 
 
-import { NoahSDK } from 'noah-zama';
+import { NoahSDK } from 'noah-protocol';
 import { ethers } from 'ethers';
 
 declare global {
@@ -139,7 +139,7 @@ export const IdentityVerification: React.FC<IdentityVerificationProps> = ({
                 const signer = await provider.getSigner();
 
                 // Using UserClient for encryption
-                const { UserClient } = await import('noah-zama');
+                const { UserClient } = await import('noah-protocol');
                 const userClient = new UserClient(signer);
 
                 // 2. Encrypt Age

@@ -1,10 +1,10 @@
-# NOAH: Privacy-Preserving KYC for Avalanche
+# NOAH: Privacy-Preserving KYC for Zama
 
-**NOAH** (Network for On-chain Authenticated Handshakes) is a state-of-the-art, zero-knowledge proof-based identity protocol for the Avalanche ecosystem. It enables applications (Gaming, DeFi, and Consumer Apps) to verify user compliance (age, jurisdiction, sanctions) without ever touching or storing personal data.
+**NOAH** (Network for On-chain Authenticated Handshakes) is a state-of-the-art, zero-knowledge proof-based identity protocol for the Zama ecosystem. It enables applications (Gaming, DeFi, and Consumer Apps) to verify user compliance (age, jurisdiction, sanctions) without ever touching or storing personal data.
 
 ## 🚀 The Noah Vision: "Verify Once, Use Everywhere"
 
-Noah eliminates the redundancy of KYC on-chain. By using Zero-Knowledge Proofs (ZKP), users bind their identity to their wallet address once. This verification is then instantly reusable across every integrated app on Avalanche—from DeFi protocols to Web3 games—while maintaining 100% user privacy.
+Noah eliminates the redundancy of KYC on-chain. By using Zero-Knowledge Proofs (ZKP), users bind their identity to their wallet address once. This verification is then instantly reusable across every integrated app on Zama—from DeFi protocols to Web3 games—while maintaining 100% user privacy.
 
 ---
 
@@ -42,17 +42,16 @@ Unlike legacy systems, Noah operates without a central backend for proof generat
 graph LR
     subgraph Client["User Device (Noah SDK)"]
         Passport[Passport MRZ] --> OCR[Automated OCR]
-        OCR --> WASM[Gnark WASM Prover]
-        WASM --> Proof[ZK Proof]
+        OCR --> FHE["FHE Encryption (fhevmjs)"]
+        FHE --> Handle[Encrypted Identity Handle]
     end
 
-    subgraph Avalanche["Avalanche C-Chain"]
-        Proof --> Registry[CredentialRegistry]
-        Registry --> Access[ProtocolAccessControl]
-        Access --> Verifier[ZKVerifier]
+    subgraph Zama["Zama FHEVM"]
+        Handle --> Registry["FHENoahRegistry (Confidential Proof)"]
+        Registry --> Access["FHEProtocolAccessControl (Confidential Rules)"]
     end
 
-    Access --> |Grant Access| DeFi[DeFi Protocol]
+    Access --> |Private Verification| DeFi[DeFi / Consumer Apps]
 ```
 
 ---
@@ -62,30 +61,30 @@ graph LR
 ### 1. Noah SDK (Client-Side)
 The heart of the protocol. It handles:
 - **Automated OCR**: Extracts MRZ data from passport images locally.
-- **Gnark-WASM Prover**: A high-performance ZK engine that generates proofs in the browser using the **BN254** curve.
-- **Identity Binding**: Automatically binds every proof to the user's active wallet address, preventing proof theft.
+- **FHE Engine**: Uses `fhevmjs` and `@zama-fhe/relayer-sdk` to encrypt identity attributes (like age) client-side.
+- **Identity Binding**: Authorizes the registry/issuer to process the encrypted handle securely on-chain.
 
-### 2. CredentialRegistry.sol
+### 2. FHENoahRegistry.sol
 The on-chain source of truth for identity status:
-- **Global Nullifiers**: Prevents identity duplication using `Hash(PassportNumber)`.
-- **Identity-Wallet Binding**: Links a specific identity to a single wallet address permanently upon first use.
-- **Revocation**: Allows authorized issuers to revoke credentials instantly.
+- **Confidential State**: Stores identity data as encrypted FHE types (`euint8`, etc.).
+- **Access Control**: Manages trusted issuers who can register identities on behalf of users.
+- **Privacy**: No one, including the node operators, can see the decrypted identity values.
 
-### 3. ProtocolAccessControl.sol
-The gateway for DeFi applications:
-- **Reusable Proofs**: Protocols can verify the same client-side proof if the user-binding matches.
-- **Customizable Requirements**: Protocols set their own thresholds for age, allowed jurisdictions, and accreditation status.
+### 3. FHEProtocolAccessControl.sol
+The gateway for private applications:
+- **Confidential Computation**: Runs on-chain logic (e.g., `age > 18`) directly on encrypted data.
+- **Zero Exposure**: Protocols receive a boolean verification result without ever seeing the raw encrypted data or the decrypted value.
 
 ---
 
 ## 🛡️ Security & Privacy
 
-### Selective Disclosure
-Noah uses **Selective Disclosure**—the protocol only proves the *requirement* (e.g., "User is over 18"), not the *data* (the user's birth date).
+### Fully Homomorphic Encryption
+Noah uses **FHE**—the protocol performs computations on *encrypted data*. Instead of revealing data, the contract computes the result (e.g., "Is User > 18?") while the data remains encrypted.
 
 ### Zero-Data Architecture
 - **No Backend**: No central server ever sees or processes the user's passport data.
-- **Client-Side Proving**: Proofs are generated via WASM in a secure environment on the user's device.
+- **Client-Side Encryption**: Encryption happens in a secure environment on the user's device.
 - **Nullifier Protection**: Uses salted hashes to prevent identity tracking across different protocols.
 
 ---
@@ -94,23 +93,23 @@ Noah uses **Selective Disclosure**—the protocol only proves the *requirement* 
 
 ### Installation
 ```bash
-npm install noah-avalanche-sdk
+npm install noah-protocol
 ```
 
 ### Quick Usage (SDK)
 ```typescript
-import { NoahSDK } from 'noah-avalanche-sdk';
+import { NoahSDK } from 'noah-protocol';
 
 const sdk = new NoahSDK({ provider: window.ethereum });
 
 // 1. Scan Passport
 const mrzData = await sdk.extractPassportData(image);
 
-// 2. Generate Proof (User-bound to wallet)
-const proof = await sdk.proveAge(mrzData, 18);
+// 2. Encrypt Identity (Age)
+const { handle } = await sdk.user.encryptIdentity({ age: 18 });
 
-// 3. Verify on Avalanche
-await sdk.grantAccess(protocolAddress, proof);
+// 3. Register & Verify on Zama
+await sdk.contracts.registerIdentity(userAddress, handle);
 ```
 
 ---
@@ -137,6 +136,6 @@ cd frontend && npm run build
 ---
 
 ## 📜 License & Project
-**Repository**: [Samuel1-ona/Noah](https://github.com/Samuel1-ona/Noah)  
-**Status**: Live on Avalanche Testnet  
-**Powered by**: Gnark, Solidity, and Avalanche.
+**Repository**: [Samuel1-ona/Noah-](https://github.com/Samuel1-ona/Noah-)  
+**Status**: Live on Zama Sepolia Testnet  
+**Powered by**: Solidity, and Zama.

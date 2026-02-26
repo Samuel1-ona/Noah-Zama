@@ -16,7 +16,7 @@ export const ProcessFlow: React.FC = () => {
         {
             icon: <CheckCircle size={32} />,
             title: "03. Verified Identity",
-            description: "Protocols verify the proof on Zama and grant access instantly."
+            description: "Protocols verify the proof and grant access instantly."
         }
     ];
 
