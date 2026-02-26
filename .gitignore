@@ -39,6 +39,8 @@ prove-*
 .idea/
 *.swp
 *.swo
+# Foundry
+foundry.lock
 
 # OS
 .DS_Store
