@@ -1,10 +1,14 @@
 {
-  "name": "noah-protocol-sdk",
-  "version": "0.1.2",
-  "description": "Securely verify your identity using Zero-Knowledge Proofs.",
+  "name": "noah-zama",
+  "version": "0.1.0",
+  "description": "Verify once, use everywhere.",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Samuel1-ona/Noah-Zama.git"
+  },
   "files": [
     "dist",
     "src"
