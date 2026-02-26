@@ -1,4 +1,5 @@
-@fhevm/solidity/=@fhevm/solidity/
-@fhevm/=@fhevm/
-@openzeppelin/=@openzeppelin/
-fhevm/=fhevm/
+@fhevm/solidity/=node_modules/@fhevm/solidity/
+@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/
+fhevm/=node_modules/fhevm/
+forge-std/=lib/forge-std/src/
+encrypted-types/=node_modules/encrypted-types/
