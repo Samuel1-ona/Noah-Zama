@@ -57,10 +57,10 @@ export class ContractClient {
    * @param config - Configuration options including provider, contract addresses, and RPC URL
    */
   constructor(config?: ContractClientConfig) {
-    this.contractAddresses = config?.contractAddresses || {
-      CredentialRegistry: "0xAAafC153AcB233C1dc29Cb4Cb7B0dB9145dF3541",
-      ZKVerifier: '0x0000000000000000000000000000000000000000',
-      ProtocolAccessControl: "0x66778ebA2d9cc857ea39fbb8e2e54238918B221C",
+    this.contractAddresses = {
+      CredentialRegistry: config?.contractAddresses?.CredentialRegistry || "0xAAafC153AcB233C1dc29Cb4Cb7B0dB9145dF3541",
+      ZKVerifier: config?.contractAddresses?.ZKVerifier || '0x0000000000000000000000000000000000000000',
+      ProtocolAccessControl: config?.contractAddresses?.ProtocolAccessControl || "0x66778ebA2d9cc857ea39fbb8e2e54238918B221C",
     };
 
 

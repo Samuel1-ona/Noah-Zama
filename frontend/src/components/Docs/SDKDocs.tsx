@@ -183,7 +183,7 @@ export const SDKDocs: React.FC = () => {
                             <CodeBlock
                                 label="src/hooks/useNoah.ts"
                                 id="init-code-v2"
-                                code={`import { NoahSDK } from 'noah-zama';\nimport { ethers } from 'ethers';\n\n// 1. Setup your provider (e.g., MetaMask)\nconst provider = new ethers.BrowserProvider(window.ethereum);\n\n// 2. Initialize the Noah SDK\nconst sdk = new NoahSDK({\n  provider: provider,\n  rpcUrl: 'https://sepolia.zama.ai' // Zama Sepolia RPC\n});\n\n// 3. (Optional) Explicitly initialize contracts\nawait sdk.init(provider);`}
+                                code={`import { NoahSDK } from 'noah-zama';\nimport { ethers } from 'ethers';\n\n// 1. Setup your provider (e.g., MetaMask)\nconst provider = new ethers.BrowserProvider(window.ethereum);\n\n// 2. Initialize the Noah SDK with environment variables\nconst sdk = new NoahSDK({\n  rpcUrl: import.meta.env.VITE_RPC_URL, // Example: 'https://sepolia.zama.ai'\n  contractAddresses: {\n    CredentialRegistry: import.meta.env.VITE_REGISTRY_ADDRESS,\n    ProtocolAccessControl: import.meta.env.VITE_PROTOCOL_ADDRESS\n  }\n});\n\n// 3. (Optional) Explicitly initialize contracts\nawait sdk.init(provider);`}
                             />
                         </div>
 

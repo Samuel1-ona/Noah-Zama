@@ -15,7 +15,7 @@ import {
 
 
 
-import { NoahSDK } from 'noah-protocol-sdk';
+import { NoahSDK } from 'noah-zama';
 import { ethers } from 'ethers';
 
 declare global {
@@ -55,7 +55,9 @@ export const IdentityVerification: React.FC<IdentityVerificationProps> = ({
     const [fheInput, setFheInput] = useState<any>(null);
     const [isAlreadyVerified, setIsAlreadyVerified] = useState<boolean>(false);
     const [accessStatus, setAccessStatus] = useState<'none' | 'requesting' | 'pending' | 'granted' | 'denied'>('none');
-    const protocolAddress = '0x8E4B7e3f9F3C55DA50aB587168f1d8A011FC8e95'; // FHEProtocolAccessControl
+    
+    // Fetch protocol address from SDK instead of hardcoding or env
+    const protocolAddress = sdk?.contracts.getContractAddresses().ProtocolAccessControl || '';
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -65,7 +67,9 @@ export const IdentityVerification: React.FC<IdentityVerificationProps> = ({
     useEffect(() => {
         const init = async () => {
             try {
-                const sdkInstance = new NoahSDK();
+                const sdkInstance = new NoahSDK({
+                    rpcUrl: import.meta.env.VITE_RPC_URL
+                });
                 setSdk(sdkInstance);
             } catch (err) {
                 console.error("Failed to initialize SDK:", err);
@@ -135,14 +139,22 @@ export const IdentityVerification: React.FC<IdentityVerificationProps> = ({
                 const signer = await provider.getSigner();
 
                 // Using UserClient for encryption
-                const { UserClient } = await import('noah-protocol-sdk');
+                const { UserClient } = await import('noah-zama');
                 const userClient = new UserClient(signer);
 
                 // 2. Encrypt Age
-                // Note: extractedData.age should be parsed appropriately
+                // IMPORTANT: We authorize the ISSUER address to use this handle
+                // because the issuer will be the one signing the registration transaction.
+                const issuerKey = import.meta.env.VITE_ISSUER_PRIVATE_KEY;
+                if (!issuerKey) throw new Error("Issuer configuration missing (VITE_ISSUER_PRIVATE_KEY)");
+                const issuerWallet = new ethers.Wallet(issuerKey);
+                
                 const age = Number(extractedData?.age) || 25;
-                console.log("Encrypting age for FHE...");
-                const result = await userClient.encryptIdentity({ age });
+                console.log("Encrypting age for FHE (authorized for Issuer)...");
+                const result = await userClient.encryptIdentity({ 
+                    age,
+                    userAddress: issuerWallet.address 
+                });
 
                 setFheInput(result);
                 setIsProcessing(false);
@@ -151,12 +163,17 @@ export const IdentityVerification: React.FC<IdentityVerificationProps> = ({
                 if (!account || !sdk || !fheInput) throw new Error("Missing data or connection");
 
                 const provider = new ethers.BrowserProvider(window.ethereum as any);
-                const signer = await provider.getSigner();
 
-                console.log("Submitting transaction to register identity on FHEVM...");
+                console.log("Submitting transaction to register identity on FHEVM (signed by Issuer)...");
                 try {
+                    // Use a dedicated issuer wallet to sign the transaction (Simulation of backend/relayer)
+                    const issuerKey = import.meta.env.VITE_ISSUER_PRIVATE_KEY;
+                    if (!issuerKey) throw new Error("Issuer configuration missing (VITE_ISSUER_PRIVATE_KEY)");
+                    
+                    const issuerWallet = new ethers.Wallet(issuerKey, provider);
+                    
                     const result = await sdk.contracts.registerIdentity(
-                        signer,
+                        issuerWallet,
                         account,
                         fheInput.handle,
                         fheInput.inputProof

@@ -7,7 +7,7 @@ import { PitchDeck } from './components/PitchDeck';
 import { VisualFlow } from './components/VisualFlow';
 import { Github, Twitter, Menu, AlertCircle } from 'lucide-react';
 
-const NOAH_CHAIN_ID = '0xaa36a7'; // Sepolia Testnet
+const NOAH_CHAIN_ID = import.meta.env.VITE_CHAIN_ID || '0xaa36a7'; // Sepolia Testnet
 const NOAH_NETWORK = {
   chainId: NOAH_CHAIN_ID,
   chainName: 'Sepolia Testnet',
@@ -16,8 +16,8 @@ const NOAH_NETWORK = {
     symbol: 'ETH',
     decimals: 18
   },
-  rpcUrls: ['https://ethereum-sepolia-rpc.publicnode.com'],
-  blockExplorerUrls: ['https://sepolia.etherscan.io/']
+  rpcUrls: [import.meta.env.VITE_RPC_URL || 'https://ethereum-sepolia-rpc.publicnode.com'],
+  blockExplorerUrls: [import.meta.env.VITE_EXPLORER_URL || 'https://sepolia.etherscan.io/']
 };
 
 

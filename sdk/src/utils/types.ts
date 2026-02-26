@@ -10,7 +10,7 @@ import type {
  */
 export interface ContractAddresses {
   CredentialRegistry: string;
-  ZKVerifier: string;
+  ZKVerifier?: string;
   ProtocolAccessControl: string;
 }
 
