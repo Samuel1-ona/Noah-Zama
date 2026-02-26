@@ -193,7 +193,7 @@ function App() {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-              <a href="https://github.com/Samuel1-ona/Noah-Protocol" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-dim)' }}>
+              <a href="https://github.com/Samuel1-ona/Noah-" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-dim)' }}>
                 <Github size={20} />
               </a>
               <button
@@ -259,7 +259,7 @@ function App() {
             </button>
             <div style={{ width: 1, height: 16, background: 'var(--border)' }} />
             <div style={{ display: 'flex', gap: '1rem' }}>
-              <a href="https://github.com/Samuel1-ona/Noah-Protocol" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/Samuel1-ona/Noah-" target="_blank" rel="noopener noreferrer">
                 <Github size={20} style={{ color: 'var(--text-dim)', cursor: 'pointer' }} />
               </a>
               <Twitter size={20} style={{ color: 'var(--text-dim)', cursor: 'pointer' }} />

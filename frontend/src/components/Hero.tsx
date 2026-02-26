@@ -54,7 +54,7 @@ export const Hero: React.FC<{ onLaunchDemo: () => void; onOpenPitch: () => void 
                     >
                         View Pitch Deck <Zap size={18} />
                     </button>
-                    <a href="https://github.com/Samuel1-ona/Noah-Protocol" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ gap: '0.75rem', textDecoration: 'none' }}>
+                    <a href="https://github.com/Samuel1-ona/Noah-" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ gap: '0.75rem', textDecoration: 'none' }}>
                         <Github size={20} /> GitHub
                     </a>
                 </motion.div>
