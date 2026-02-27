@@ -172,9 +172,15 @@ export const IdentityVerification: React.FC<IdentityVerificationProps> = ({
                     
                     const issuerWallet = new ethers.Wallet(issuerKey, provider);
                     
+                    // Generate a deterministic nullifier from the passport number to prevent sybil registrations
+                    // In a production system, this would be hash(passportNumber + system_salt)
+                    const identityId = extractedData?.passportNumber || account; // Fallback to account only if OCR fails
+                    const nullifier = ethers.id(identityId + "_identity_v1");
+
                     const result = await sdk.contracts.registerIdentity(
                         issuerWallet,
                         account,
+                        nullifier,
                         fheInput.handle,
                         fheInput.inputProof
                     );

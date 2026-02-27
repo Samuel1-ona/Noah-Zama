@@ -78,7 +78,8 @@ export class NoahSDK {
     public async registerWithFHE(
         signer: Signer,
         userAddress: string,
-        age: number
+        age: number,
+        nullifier?: string
     ): Promise<TransactionResult> {
         try {
             // 1. Initialize Prover via Contract handles (addresses would be fetched/configured)
@@ -95,10 +96,13 @@ export class NoahSDK {
                 throw new NoahProverError('Encryption failed');
             }
 
+            const finalNullifier = nullifier || (await import('ethers')).ethers.id(userAddress + "_identity_v1");
+
             // 3. Submit to Chain
             return await this.contracts.registerIdentity(
                 signer,
                 userAddress,
+                finalNullifier,
                 encryptionResult.handle,
                 encryptionResult.inputProof
             );

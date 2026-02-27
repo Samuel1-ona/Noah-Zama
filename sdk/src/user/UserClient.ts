@@ -1,4 +1,4 @@
-import type { Signer } from 'ethers';
+import { ethers, type Signer } from 'ethers';
 import type { Requirements, TransactionResult, ContractAddresses } from '../utils/types';
 import { ContractClient } from '../core/ContractClient';
 import { FHEEncryptor } from './FHEEncryptor';
@@ -10,6 +10,7 @@ import { IdentityManager } from '../utils/identity';
 export interface Credential {
   age: number;
   userAddress?: string;
+  nullifier?: string; // Optional: can be generated from PII
 }
 
 /**
@@ -98,12 +99,18 @@ export class UserClient {
    */
   async registerIdentity(
     userAddress: string,
-    fheInput: FHEInputResult
+    fheInput: FHEInputResult,
+    nullifier?: string
   ): Promise<TransactionResult> {
     try {
+      // If no nullifier provided, generate a deterministic one for demo purposes
+      // In production, this would be hash(PassportNumber + Salt)
+      const finalNullifier = nullifier || ethers.id(userAddress + "_identity_v1");
+
       return await this.contractClient.registerIdentity(
         this.signer,
         userAddress,
+        finalNullifier,
         fheInput.handle,
         fheInput.inputProof
       );

@@ -23,6 +23,7 @@ contract FHENoahRegistry is ZamaEthereumConfig, AccessControl {
     mapping(address => bool) public isRegistered;
     mapping(address => euint32) internal encryptedAges; // user => encrypted age
     mapping(address => bool) public trustedIssuers;
+    mapping(bytes32 => address) public identityNullifiers; // nullifier => user address
 
     modifier onlyIssuer() {
         require(trustedIssuers[msg.sender], "Not trusted issuer");
@@ -50,20 +51,26 @@ contract FHENoahRegistry is ZamaEthereumConfig, AccessControl {
     }
 
     /**
-     * @notice Register user identity with encrypted age.
+     * @notice Register user identity with encrypted age and sybil protection.
      * @param user       The wallet address to bind.
+     * @param nullifier  A unique deterministic hash of the user's identity (Sybil protection).
      * @param ageHandle  The external handle for the user's encrypted age.
      * @param ageProof   The FHE input proof from the relayer coprocessor.
      */
     function registerIdentity(
         address user,
+        bytes32 nullifier,
         externalEuint32 ageHandle,
         bytes calldata ageProof
     ) external onlyIssuer {
+        require(identityNullifiers[nullifier] == address(0), "Identity already registered");
+        
         // FHE.fromExternal verifies the coprocessor proof and returns a live euint32
         euint32 encryptedAge = FHE.fromExternal(ageHandle, ageProof);
         encryptedAges[user] = encryptedAge;
+        identityNullifiers[nullifier] = user;
         isRegistered[user] = true;
+        
         emit IdentityRegistered(user, msg.sender);
     }
 

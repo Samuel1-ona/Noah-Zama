@@ -25,7 +25,8 @@ import type {
 const CREDENTIAL_REGISTRY_ABI = [
   'function isRegistered(address) view returns (bool)',
   'function trustedIssuers(address) view returns (bool)',
-  'function registerIdentity(address user, bytes32 ageHandle, bytes ageProof)',
+  'function registerIdentity(address user, bytes32 nullifier, bytes32 ageHandle, bytes ageProof)',
+  'function identityNullifiers(bytes32) view returns (address)',
   'function getEncryptedAge(address user) view returns (uint256)',
   'function addIssuer(address issuer, string memory name)',
   'event IdentityRegistered(address indexed user, address indexed issuer)',
@@ -58,9 +59,9 @@ export class ContractClient {
    */
   constructor(config?: ContractClientConfig) {
     this.contractAddresses = {
-      CredentialRegistry: config?.contractAddresses?.CredentialRegistry || "0xAAafC153AcB233C1dc29Cb4Cb7B0dB9145dF3541",
+      CredentialRegistry: config?.contractAddresses?.CredentialRegistry || "0x4C950CA3857f691443dADD0882dc015E656Ae2AA",
       ZKVerifier: config?.contractAddresses?.ZKVerifier || '0x0000000000000000000000000000000000000000',
-      ProtocolAccessControl: config?.contractAddresses?.ProtocolAccessControl || "0x66778ebA2d9cc857ea39fbb8e2e54238918B221C",
+      ProtocolAccessControl: config?.contractAddresses?.ProtocolAccessControl || "0xDc218b412EE84D459Cdc962A1285746B843c508E",
     };
 
 
@@ -146,13 +147,14 @@ export class ContractClient {
   async registerIdentity(
     signer: Signer,
     userAddress: string,
+    nullifier: string,
     ageHandle: string,
     ageProof: string
   ): Promise<TransactionResult> {
     if (!signer) throw new Error('Signer is required');
     const contract = new ethers.Contract(this.contractAddresses.CredentialRegistry, CREDENTIAL_REGISTRY_ABI, signer);
     try {
-      const tx = await contract.registerIdentity(userAddress, ageHandle, ageProof) as ContractTransactionResponse;
+      const tx = await contract.registerIdentity(userAddress, nullifier, ageHandle, ageProof) as ContractTransactionResponse;
       const receipt = await tx.wait();
       return { transactionHash: tx.hash, receipt };
     } catch (error) {
